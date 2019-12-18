@@ -5,7 +5,7 @@ var Rectangle = function (center, width, height, fix) {
     this.mHeight = height;
     this.mVertex = [];
     this.mFaceNormal = [];
-    this.mFix = fix;
+    this.mBoundRadius = Math.sqrt(width*width + height*height)/2;
 
 
     //0--TopLeft;1--TopRight;2--BottomRight;3--BottomLeft

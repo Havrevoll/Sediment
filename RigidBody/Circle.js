@@ -2,7 +2,8 @@ var Circle = function (center, radius, fix) {
     RigidShape.call(this, center);
     this.mType = "Circle";
     this.mRadius = radius;
-    this.mFix = fix;
+    this.mBoundRadius = radius;
+    
     // The start point of line in circle
     this.mStartpoint = new Vec2(center.x, center.y - radius);
 };
