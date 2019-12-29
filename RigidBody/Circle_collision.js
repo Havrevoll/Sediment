@@ -32,4 +32,5 @@ Circle.prototype.collidedCircCirc = function (c1, c2,
             collisionInfo.setInfo(rSum, new Vec2(0, -1),
                 c2.mCenter.add(new Vec2(0, c2.mRadius)));
     }
+    return true;
 };
