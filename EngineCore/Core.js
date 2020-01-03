@@ -7,6 +7,8 @@ gEngine.Core = (function () { //Må gjerast om til ein skikkeleg konstruktor?!
     mCanvas.width = mWidth;
 
     var mAllObjects = [];
+    var mGravity = new Vec2(0, 10);
+    var mMovement = false;
 
 
     var mCurrentTime, mElapsedTime, mPreviousTime = Date.now(), mLagTime = 0;
@@ -90,7 +92,10 @@ gEngine.Core = (function () { //Må gjerast om til ein skikkeleg konstruktor?!
         mAllObjects: mAllObjects,
         mWidth: mWidth,
         mHeight: mHeight,
-        mContext: mContext
+        mContext: mContext,
+        mGravity: mGravity,
+        mUpdateIntervalInSeconds: mUpdateIntervalInSeconds,
+        mMovement: mMovement
     };
 
 
