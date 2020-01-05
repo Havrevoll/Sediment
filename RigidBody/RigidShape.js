@@ -1,7 +1,31 @@
-function RigidShape(center) {
+function RigidShape(center, mass, friction, restitution) {
     this.mCenter = center;
+    this.mInertia = 0;
+    if (mass !== undefined)
+        this.mInvMass = mass;
+    else
+        this.mInvMass = 1;
+
+    if (friction !== undefined)
+        this.mFriction = friction;
+    else
+        this.mFriction = 0.8;
+
+    if (restitution !== undefined)
+        this.mRestitution = restitution;
+    else
+        this.mRestitution = 0.2;
+
     this.mVelocity = new Vec2(0, 0);
-    this.mAcceleration = gEngine.Core.mGravity;
+
+    if (this.mInvMass !== 0) {
+        this.mInvMass = 1 / this.mInvMass;
+        this.mAcceleration = gEngine.Core.mGravity;
+
+    } else {
+
+        this.mAcceleration = new Vec2(0, 0);
+    }
 
     //angle
     this.mAngle = 0;
