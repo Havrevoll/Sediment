@@ -1,11 +1,11 @@
-var Rectangle = function (center, width, height, fix) {
-    RigidShape.call(this, center);
+var Rectangle = function (center, width, height, mass, friction, restitution) {
+    RigidShape.call(this, center, mass, friction, restitution);
     this.mType = "Rectangle";
     this.mWidth = width;
     this.mHeight = height;
     this.mVertex = [];
     this.mFaceNormal = [];
-    this.mBoundRadius = Math.sqrt(width*width + height*height)/2;
+    this.mBoundRadius = Math.sqrt(width * width + height * height) / 2;
 
 
     //0--TopLeft;1--TopRight;2--BottomRight;3--BottomLeft
@@ -25,6 +25,7 @@ var Rectangle = function (center, width, height, fix) {
     this.mFaceNormal[3] = this.mVertex[0].subtract(this.mVertex[1]);
     this.mFaceNormal[3] = this.mFaceNormal[3].normalize();
 
+    this.updateInertia();
 };
 
 var prototype = Object.create(RigidShape.prototype);
@@ -68,4 +69,16 @@ Rectangle.prototype.rotate = function (angle) {
         mVertex[1]);
     this.mFaceNormal[3] = this.mFaceNormal[3].normalize();
     return this;
+};
+
+Rectangle.prototype.updateInertia = function () {
+    // Expect this.mInvMass to be already inverted!
+    if (this.mInvMass === 0)
+        this.mInertia = 0;
+    else {
+        //inertia = mass * width²+height²
+        this.mInertia = (1 / this.mInvMass) *
+            (this.mWidth * this.mWidth + this.mHeight * this.mHeight) / 12;
+        this.mInertia = 1 / this.mInertia;
+    }
 };

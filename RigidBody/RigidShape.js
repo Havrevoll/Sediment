@@ -39,6 +39,32 @@ function RigidShape(center, mass, friction, restitution) {
     gEngine.Core.mAllObjects.push(this);
 }
 
+RigidShape.prototype.updateMass = function (delta) {
+    var mass;
+    if (this.mInvMass !== 0)
+        mass = 1 / this.mInvMass;
+    else
+        mass = 0;
+
+    mass += delta;
+    if (mass <= 0) {
+        this.mInvMass = 0;
+        this.mVelocity = new Vec2(0, 0);
+        this.mAcceleration = new Vec2(0, 0);
+        this.mAngularVelocity = 0;
+        this.mAngularAcceleration = 0:
+    } else {
+        this.mInvMass = 1 / mass;
+        this.mAcceleration = gEngine.Core.mGravity;
+    }
+    this.updateInertia();
+};
+
+RigidShape.prototype.updateInertia = function () {
+    //subclass must define this.
+    //must work with inverted this.mInvMass
+};
+
 RigidShape.prototype.update = function () {
     if (gEngine.Core.mMovement) {
         var dt = gEngine.Core.mUpdateIntervalInSeconds;

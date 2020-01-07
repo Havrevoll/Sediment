@@ -10,56 +10,90 @@ window.addEventListener("keydown", event => {
             Math.random() * 30 + 10,
             Math.random() * 30 + 10);
     }
-    if (event.key == "g") { //g
+    else if (event.key == "g") { //g
         var r1 = new Circle(new Vec2(gEngine.Core.mAllObjects[gObjectNum].mCenter.x,
             gEngine.Core.mAllObjects[gObjectNum].mCenter.y),
             Math.random() * 10 + 20);
 
     }
-    if (event.key >= "0" && event.key <= "9") { //number
+    else if (event.key >= "0" && event.key <= "9") { //number
         if (Number(event.key) < gEngine.Core.mAllObjects.length)
             gObjectNum = Number(event.key);
     }
-    if (event.key == "ArrowUp") { //up arrow
+    else if (event.key == "ArrowUp") { //up arrow
         if (gObjectNum > 0)
             gObjectNum--;
     }
-    if (event.key == "ArrowDown") { // down arrow
+    else if (event.key == "ArrowDown") { // down arrow
         if (gObjectNum < gEngine.Core.mAllObjects.length - 1)
             gObjectNum++;
     }
 
     //Move with WASD keys
-    if (event.key == "w") {
+    else if (event.key == "w") {
         gEngine.Core.mAllObjects[gObjectNum].move(new Vec2(0, -10));
     }
-    if (event.key == "s") {
+    else if (event.key == "s") {
         gEngine.Core.mAllObjects[gObjectNum].move(new Vec2(0, +10));
     }
-    if (event.key == "a") {
+    else if (event.key == "a") {
         gEngine.Core.mAllObjects[gObjectNum].move(new Vec2(-10, 0));
     }
-    if (event.key == "d") {
+    else if (event.key == "d") {
         gEngine.Core.mAllObjects[gObjectNum].move(new Vec2(+10, 0));
     }
 
+    //testing for å endra maskina
+    else if (event.key == "i") {
+        gEngine.Core.mAllObjects[gObjectNum].mVelocity.y -= 1;
+    }
+    else if (event.key == "k") {
+        gEngine.Core.mAllObjects[gObjectNum].mVelocity.y += 1;
+    }
+    else if (event.key == "j") {
+        gEngine.Core.mAllObjects[gObjectNum].mVelocity.x -= 1;
+    }
+    else if (event.key == "l") {
+        gEngine.Core.mAllObjects[gObjectNum].mVelocity.x += 1;
+    }
+    else if (event.key == "u") {
+        gEngine.Core.mAllObjects[gObjectNum].mAngularVelocity -= 0.1;
+    }
+    else if (event.key == "o") {
+        gEngine.Core.mAllObjects[gObjectNum].mAngularVelocity += 0.1;
+    }
+    else if (event.key == "z") {
+        gEngine.Core.mAllObjects[gObjectNum].updateMass(-1);
+    }
+    else if (event.key == "x") {
+        gEngine.Core.mAllObjects[gObjectNum].updateMass(1);
+    }
+    else if (event.key == "c") {
+        gEngine.Core.mAllObjects[gObjectNum].mFriction -= 0.01;
+    }
+    else if (event.key == "x") {
+        gEngine.Core.mAllObjects[gObjectNum].updateMass(1);
+    }
+
+
+
     // rotate with QE keys
-    if (event.key == "q") {
+    else if (event.key == "q") {
         gEngine.Core.mAllObjects[gObjectNum].rotate(-0.1);
     }
-    if (event.key == "e") {
+    else if (event.key == "e") {
         gEngine.Core.mAllObjects[gObjectNum].rotate(0.1);
     }
 
     // Toggle gravity with the H key
-    if (event.key == "h") {
+    else if (event.key == "h") {
         if (gEngine.Core.mAllObjects[gObjectNum].mFix == 0)
             gEngine.Core.mAllObjects[gObjectNum].mFix = 1;
         else gEngine.Core.mAllObjects[gObjectNum].mFix = 0;
     }
 
     // reset scene
-    if (event.key == "r") {
+    else if (event.key == "r") {
         gEngine.Core.mAllObjects.splice(5, gEngine.Core.mAllObjects.length);
         gObjectNum = 0;
     }
