@@ -123,7 +123,7 @@ window.addEventListener("keydown", function (event) {
             gEngine.Core.mMovement = !gEngine.Core.mMovement;
             break;
 
-        case ""
+        
 
         case "KeyF":
             var r1 = new Rectangle(new Vec2(gEngine.Core.mAllObjects[gObjectNum].mCenter.x,
