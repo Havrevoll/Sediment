@@ -24,18 +24,18 @@ gEngine.Core = (function () { //Må gjerast om til ein skikkeleg konstruktor?!
             "<p><b>Selected Object:</b>:</p>" +
             "<ul style=\"margin:-10px\">" +
             "<li>Id: " + gObjectNum + "</li>" +
-            "<li>Center: " + mAllObject[gObjectNum].mCenter.x.toPrecision(3) +
-            "," + mAllObject[gObjectNum].mCenter.y.toPrecision(3) + "</li>" +
-            "<li>Angle: " + mAllObject[gObjectNum].mAngle.toPrecision(3) + "</li>" +
-            "<li>Velocity: " + mAllObject[gObjectNum].mVelocity.x.toPrecision(3) +
-            "," + mAllObject[gObjectNum].mVelocity.y.toPrecision(3) + "</li>" +
-            "<li>AngluarVelocity: " + mAllObject[gObjectNum].mAngularVelocity.
+            "<li>Center: " + mAllObjects[gObjectNum].mCenter.x.toPrecision(3) +
+            "," + mAllObjects[gObjectNum].mCenter.y.toPrecision(3) + "</li>" +
+            "<li>Angle: " + mAllObjects[gObjectNum].mAngle.toPrecision(3) + "</li>" +
+            "<li>Velocity: " + mAllObjects[gObjectNum].mVelocity.x.toPrecision(3) +
+            "," + mAllObjects[gObjectNum].mVelocity.y.toPrecision(3) + "</li>" +
+            "<li>AngluarVelocity: " + mAllObjects[gObjectNum].mAngularVelocity.
                 toPrecision(3) + "</li>" +
-            "<li>Mass: " + 1 / mAllObject[gObjectNum].mInvMass.toPrecision(3) +
+            "<li>Mass: " + 1 / mAllObjects[gObjectNum].mInvMass.toPrecision(3) +
             "</li>" +
-            "  <li>Friction: " + mAllObject[gObjectNum].mFriction.toPrecision(3) +
+            "  <li>Friction: " + mAllObjects[gObjectNum].mFriction.toPrecision(3) +
             "</li>" +
-            "<li>Restitution: " + mAllObject[gObjectNum].mRestitution.
+            "<li>Restitution: " + mAllObjects[gObjectNum].mRestitution.
                 toPrecision(3) + "</li>" +
             "<li>Movement: " + gEngine.Core.mMovement + "</li>" +
             "</ul> <hr>" +

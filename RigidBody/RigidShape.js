@@ -52,7 +52,7 @@ RigidShape.prototype.updateMass = function (delta) {
         this.mVelocity = new Vec2(0, 0);
         this.mAcceleration = new Vec2(0, 0);
         this.mAngularVelocity = 0;
-        this.mAngularAcceleration = 0:
+        this.mAngularAcceleration = 0;
     } else {
         this.mInvMass = 1 / mass;
         this.mAcceleration = gEngine.Core.mGravity;
