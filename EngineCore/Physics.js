@@ -61,6 +61,50 @@ gEngine.Physics = (function () {
         //correct positions
         if (gEngine.Physics.mPositionalCorrectionFlag)
             positionalCorrection(s1, s2, collisionInfo);
+
+        var n = collisionInfo.getNormal();
+        var v1 = s1.mVelocity;
+        var v2 = s2.mVelocity;
+        var relativeVelocity = v2.subtract(v1);
+
+        // Relative velocity in normal direction
+        var rVelocityInNormal = relativeVelocity.dot(n);
+
+        // if objects moving apart ignore
+        if (rVelocityInNormal > 0)
+            return;
+
+        // compute and apply response impulses for each object
+        var newRestitution = Math.min(s1.mRestitution, s2.mRestitution);
+        var newFriction = Math.min(s1.mFriction, s2.mFriction);
+
+        // Calc impulse scalar
+        var jN = -(1 + newRestitution) * rVelocityInNormal;
+        jN = jN / (s1.mInvMass + s2.mInvMass);
+
+        // impulse is in direction of normal (from s1 to s2)
+        var impulse = n.scale(jN);
+        // impulse = F dt = m * ∆v
+        // ∆v = impulse / m
+        s1.mVelocity = s1.mVelocity.subtract(impulse.scale(s1.mInvMass));
+        s2.mVelocity = s2.mVelocity.add(impulse.scale(s2.mInvMass));
+
+        var tangent = relativeVelocity.subtract(n.scale(relativeVelocity.dot(n)));
+        // relativeVelocity.dot(tangent) should be less than 0
+        tangent = tangent.normalize().scale(-1);
+
+        var jT = -(1 + newRestitution) * relativeVelocity.dot(tangent) * newFriction;
+        jT = jT / (s1.mInvMass + s2.mInvMass);
+
+        // friction should be less than force in normal direction
+        if (jT > jN) jT = jN;
+        // impulse is from s1 to s2 (in opposite direction of velocity)
+        impulse = tangent.scale(jT);
+
+        s1.mVelocity = s1.mVelocity.subtract(impulse.scale(s1.mInvMass));
+        s2.mVelocity = s2.mVelocity.add(impulse.scale(s2.mInvMass));
+
+
     };
 
     var mPublic = {
