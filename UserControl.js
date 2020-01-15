@@ -4,9 +4,9 @@ var context = gEngine.Core.mContext;
 var gObjectNum = 0;
 
 window.addEventListener("keydown", function (event) {
-   /* if (event.defaultPrevented) {
-        return; // Do nothing if event already handled
-    }*/
+    /* if (event.defaultPrevented) {
+         return; // Do nothing if event already handled
+     }*/
 
     // Eg har henta event-handlinga frå https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code 
     // der det står forklart for eit dataspel. Det verkar fornuftig å bruka switch i staden for alle dei if-setningane i denne situasjonen.
@@ -119,11 +119,15 @@ window.addEventListener("keydown", function (event) {
             gEngine.Core.mAllObjects[gObjectNum].mRestitution += 0.01;
             break;
 
+        case "KeyM":
+            gEngine.Physics.mPositionalCorrectionFlag = !gEngine.Physics.mPositionalCorrectionFlag;
+            break;
+
         case "Backslash":
             gEngine.Core.mMovement = !gEngine.Core.mMovement;
             break;
 
-        
+
 
         case "KeyF":
             var r1 = new Rectangle(new Vec2(gEngine.Core.mAllObjects[gObjectNum].mCenter.x,
